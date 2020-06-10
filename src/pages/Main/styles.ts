@@ -1,18 +1,28 @@
 import styled from "styled-components";
 import { shade } from "polished";
 
-interface PokeTypesProps {
-  pokeType: string;
-}
-
-const typesVariation: object = {
+const typesVariation = {
   grass: "#8dd25b",
   rock: "#b89e34",
   fire: "#e57b3c",
   ground: "#dad388",
   ghost: "#6c5681",
   water: "#7586f1",
+  dark: "#413026",
+  psychic: "#ec4781",
+  flying: "#667bd9",
+  steel: "#b3b3c2",
+  poison: "#914493",
+  electric: "#fcbb17",
+  fairy: "#f3aff3",
+  normal: "#7586f1",
 };
+
+export type ElementTypes = keyof typeof typesVariation;
+
+interface PokeTypesProps {
+  pokeType: ElementTypes;
+}
 
 export const Header = styled.header`
   height: 60px;
@@ -134,4 +144,3 @@ export const PokeTypes = styled.p<PokeTypesProps>`
   font-family: "Press Start 2P", cursive;
   color: ${(props) => typesVariation[props.pokeType]};
 `;
-//

@@ -13,6 +13,7 @@ import {
   Content,
   Pokes,
   PokeTypes,
+  ElementTypes,
 } from "./styles";
 
 interface PokemonTypes {
@@ -98,7 +99,7 @@ const Main: React.FC = () => {
               <small>{`#${poke.id}`}</small>
             </div>
             {poke.types.map((type, i) => (
-              <PokeTypes key={i} pokeType={type.type.name}>
+              <PokeTypes key={i} pokeType={type.type.name as ElementTypes}>
                 {type.type.name.toUpperCase()}
               </PokeTypes>
             ))}

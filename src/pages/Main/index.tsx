@@ -2,7 +2,7 @@ import React, { useState, FormEvent, useEffect } from "react";
 
 import api from "../../service/api";
 
-import { Form, Content, Pokes, PokeTypes } from "./styles";
+import { Form, Content, Pokes, PokeTypes, Error } from "./styles";
 
 interface PokemonTypes {
   type: {
@@ -21,6 +21,7 @@ interface Pokemon {
 
 const Main: React.FC = () => {
   const [newPoke, setPokemon] = useState("");
+  const [newError, setNewError] = useState("");
   const [pokemonsList, setPokeList] = useState<Pokemon[]>(() => {
     const savedPokes = localStorage.getItem("PokeApi - React");
 
@@ -39,27 +40,36 @@ const Main: React.FC = () => {
     event: FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
+
+    if (!newPoke) {
+      setNewError("Digite o nome do Pokémon com letras minúsculas");
+      return;
+    }
+
     try {
       const response = await api.get<Pokemon>(`pokemon/${newPoke}`);
 
       const pokeInfo = response.data;
 
+      setNewError("");
       setPokeList([...pokemonsList, pokeInfo]);
       setPokemon("");
     } catch (e) {
-      console.log(e);
+      setNewError("Erro na busca do Pokémon citado");
     }
   }
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form hasError={!!newError} onSubmit={handleSubmit}>
         <input
           value={newPoke}
           onChange={(e) => setPokemon(e.target.value)}
           placeholder="Digite o nome do Pokémon"
         />
         <button type="submit">Procurar</button>
+
+        {newError && <Error>{newError}</Error>}
       </Form>
 
       <Content>

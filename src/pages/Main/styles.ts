@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { shade } from "polished";
 
 interface TypesVariation {
@@ -26,7 +26,11 @@ interface PokeTypesProps {
   pokeType: string;
 }
 
-export const Form = styled.form`
+interface FormProps {
+  hasError: boolean;
+}
+
+export const Form = styled.form<FormProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,6 +45,13 @@ export const Form = styled.form`
     text-align: center;
   }
 
+  ${(props) =>
+    props.hasError &&
+    css`
+      border-color: #c50300;
+      border-radius: 2px;
+    `}
+
   button {
     border: 0;
     border-radius: 5px;
@@ -54,6 +65,34 @@ export const Form = styled.form`
     &:hover {
       background: ${shade(0.2, "#ef5350")};
     }
+  }
+`;
+
+export const Error = styled.span`
+  visibility: visible;
+  background-color: #c53030;
+  width: 350px;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  box-shadow: 4px 6px 5px #9c9c9c;
+
+  position: absolute;
+  z-index: 1;
+  left: 40%;
+  margin-left: -60px;
+  top: 7%;
+
+  &::before {
+    content: "";
+    border-style: solid;
+    border-color: #c53030 transparent;
+    border-width: 6px 6px 0 6px;
+    top: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 

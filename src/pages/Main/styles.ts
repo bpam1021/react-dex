@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { shade } from "polished";
 
-const typesVariation = {
+interface TypesVariation {
+  [index: string]: string;
+}
+
+const typesVariation: TypesVariation = {
   grass: "#8dd25b",
   rock: "#b89e34",
   fire: "#e57b3c",
@@ -18,42 +22,9 @@ const typesVariation = {
   normal: "#7586f1",
 };
 
-export type ElementTypes = keyof typeof typesVariation;
-
 interface PokeTypesProps {
-  pokeType: ElementTypes;
+  pokeType: string;
 }
-
-export const Header = styled.header`
-  height: 60px;
-  background: #ef5350;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const HeaderContent = styled.div`
-  width: 700px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  img {
-    height: 80%;
-    margin-left: 20px;
-  }
-`;
-
-export const Icons = styled.div`
-  a {
-    color: #000;
-
-    & + a {
-      margin-left: 10px;
-    }
-  }
-`;
 
 export const Form = styled.form`
   display: flex;
@@ -98,6 +69,7 @@ export const Content = styled.div`
 `;
 
 export const Pokes = styled.div`
+  cursor: pointer;
   width: 150px;
   height: 200px;
   background: #fff;
@@ -106,6 +78,7 @@ export const Pokes = styled.div`
   flex-direction: row;
   margin-left: 30px;
   box-shadow: 10px 10px 5px #cccccc;
+  border: 2px #ccc solid;
 
   img {
     width: 120px;

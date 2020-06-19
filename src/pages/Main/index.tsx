@@ -1,20 +1,8 @@
 import React, { useState, FormEvent, useEffect } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 import api from "../../service/api";
 
-import pokeLogo from "../../assets/pokeapi_logo.png";
-
-import {
-  Header,
-  HeaderContent,
-  Icons,
-  Form,
-  Content,
-  Pokes,
-  PokeTypes,
-  ElementTypes,
-} from "./styles";
+import { Form, Content, Pokes, PokeTypes } from "./styles";
 
 interface PokemonTypes {
   type: {
@@ -65,20 +53,6 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <HeaderContent>
-          <img src={pokeLogo} alt="PokeApi Logo" />
-          <Icons>
-            <a href="https://github.com/Wallghost" target="blank">
-              <FaGithub size={30} />
-            </a>
-            <a href="teste" target="blank">
-              <FaLinkedin size={30} />
-            </a>
-          </Icons>
-        </HeaderContent>
-      </Header>
-
       <Form onSubmit={handleSubmit}>
         <input
           value={newPoke}
@@ -99,7 +73,7 @@ const Main: React.FC = () => {
               <small>{`#${poke.id}`}</small>
             </div>
             {poke.types.map((type, i) => (
-              <PokeTypes key={i} pokeType={type.type.name as ElementTypes}>
+              <PokeTypes key={i} pokeType={type.type.name}>
                 {type.type.name.toUpperCase()}
               </PokeTypes>
             ))}

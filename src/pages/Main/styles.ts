@@ -65,6 +65,10 @@ export const Form = styled.form<FormProps>`
     &:hover {
       background: ${shade(0.2, "#ef5350")};
     }
+
+    &:disabled {
+      background: #ee7e7c;
+    }
   }
 `;
 

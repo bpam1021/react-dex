@@ -1,9 +1,15 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { shade } from "polished";
 
 interface TypesVariation {
   [index: string]: string;
 }
+
+const hide = keyframes`
+to {
+        opacity: 0;
+    }
+`;
 
 const typesVariation: TypesVariation = {
   grass: "#8dd25b",
@@ -73,6 +79,7 @@ export const Form = styled.form<FormProps>`
 `;
 
 export const Error = styled.span`
+  animation: ${hide} 1s linear 2s forwards;
   visibility: visible;
   background-color: #c53030;
   width: 350px;
@@ -121,13 +128,14 @@ export const Pokes = styled.div`
   flex-direction: row;
   margin-left: 30px;
   box-shadow: 10px 10px 5px #cccccc;
-  border: 2px #ccc solid;
+  border: 2px #b8b8b8 solid;
 
   img {
     width: 120px;
     height: 120px;
     display: block;
     margin: auto;
+    padding: 0;
   }
 
   div {

@@ -49,7 +49,8 @@ const Main: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await api.get<Pokemon>(`pokemon/${newPoke}`);
+      const newPokeTreated = newPoke.charAt(0).toLowerCase() + newPoke.slice(1);
+      const response = await api.get<Pokemon>(`pokemon/${newPokeTreated}`);
       setLoading(false);
 
       const pokeInfo = response.data;

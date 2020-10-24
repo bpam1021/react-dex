@@ -15,9 +15,11 @@ export const HeaderContent = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  img {
-    height: 80%;
-    margin-left: 20px;
+  a {
+    img {
+      margin-top: 42px;
+      box-shadow: 0 0 black;
+    }
   }
 `;
 

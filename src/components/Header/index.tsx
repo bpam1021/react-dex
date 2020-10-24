@@ -8,12 +8,14 @@ import pokeLogo from "../../assets/pokeapi_logo.png";
 const HeaderComponent: React.FC = () => (
   <Header>
     <HeaderContent>
-      <img src={pokeLogo} alt="PokeApi Logo" />
+      <a href="https://pokeapi.co/">
+        <img src={pokeLogo} alt="PokeApi Logo" />
+      </a>
       <Icons>
         <a href="https://github.com/Wallghost" target="blank">
           <FaGithub size={30} />
         </a>
-        <a href="teste" target="blank">
+        <a href="https://www.linkedin.com/in/miguel-pombo/" target="blank">
           <FaLinkedin size={30} />
         </a>
       </Icons>

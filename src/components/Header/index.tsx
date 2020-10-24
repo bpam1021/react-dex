@@ -13,10 +13,10 @@ const HeaderComponent: React.FC = () => (
       </a>
       <Icons>
         <a href="https://github.com/Wallghost" target="blank">
-          <FaGithub size={30} />
+          <FaGithub size={37} />
         </a>
         <a href="https://www.linkedin.com/in/miguel-pombo/" target="blank">
-          <FaLinkedin size={30} />
+          <FaLinkedin size={37} />
         </a>
       </Icons>
     </HeaderContent>

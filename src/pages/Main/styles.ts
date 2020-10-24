@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 import { shade } from "polished";
 
 interface TypesVariation {
@@ -167,4 +168,16 @@ export const PokeTypes = styled.p<PokeTypesProps>`
   text-align: center;
   font-family: "Press Start 2P", cursive;
   color: ${(props) => typesVariation[props.pokeType]};
+`;
+
+export const LinkPoke = styled(Link)`
+  text-decoration: none;
+
+  &:link {
+    color: #000;
+  }
+
+  &:visited {
+    color: #000;
+  }
 `;

@@ -18,7 +18,6 @@ export const HeaderContent = styled.div`
   a {
     img {
       margin-top: 42px;
-      box-shadow: 0 0 black;
     }
   }
 `;

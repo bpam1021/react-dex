@@ -1,8 +1,7 @@
 import React, { useState, FormEvent, useEffect } from "react";
-
 import api from "../../service/api";
 
-import { Form, Content, Pokes, PokeTypes, Error } from "./styles";
+import { Form, Content, Pokes, PokeTypes, Error, LinkPoke } from "./styles";
 
 interface PokemonTypes {
   type: {
@@ -81,20 +80,22 @@ const Main: React.FC = () => {
 
       <Content>
         {pokemonsList.map((poke) => (
-          <Pokes key={poke.id}>
-            <img src={poke.sprites.front_default} alt={poke.name} />
-            <div>
-              <strong>
-                {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
-              </strong>
-              <small>{`#${poke.id}`}</small>
-            </div>
-            {poke.types.map((type, i) => (
-              <PokeTypes key={i} pokeType={type.type.name}>
-                {type.type.name.toUpperCase()}
-              </PokeTypes>
-            ))}
-          </Pokes>
+          <LinkPoke key={poke.id} to={`/pokeInfo/${poke.name}`}>
+            <Pokes>
+              <img src={poke.sprites.front_default} alt={poke.name} />
+              <div>
+                <strong>
+                  {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                </strong>
+                <small>{`#${poke.id}`}</small>
+              </div>
+              {poke.types.map((type, i) => (
+                <PokeTypes key={i} pokeType={type.type.name}>
+                  {type.type.name.toUpperCase()}
+                </PokeTypes>
+              ))}
+            </Pokes>
+          </LinkPoke>
         ))}
       </Content>
     </>

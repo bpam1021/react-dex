@@ -117,7 +117,7 @@ const Main: React.FC = () => {
           <ContentNothingMessage>
             <NoPokesFoundMessage>
               No Pokémon found
-            <img src={SuprisedPikachu} />
+            <img src={SuprisedPikachu} alt="Suprised Pikachu" />
             </NoPokesFoundMessage>
           </ContentNothingMessage>
         )}

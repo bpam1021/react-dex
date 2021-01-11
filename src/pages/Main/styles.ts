@@ -117,6 +117,7 @@ export const Content = styled.div`
   grid-gap: 10px;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 `;
 
 export const Pokes = styled.div`

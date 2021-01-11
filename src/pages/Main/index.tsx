@@ -35,7 +35,7 @@ const Main: React.FC = () => {
   const [pokemonsList, setPokeList] = useState<Pokemon[]>([]);
 
   const getAllPokes = useCallback(async (): Promise<void> => {
-    const { data } = await api.get("pokemon/?limit=150");
+    const { data } = await api.get("pokemon/?limit=151");
     const urlsArray: Array<GetPokeArrayProps> = data.results;
 
     const pokesObjectsArray = urlsArray.map((i) => i.url);

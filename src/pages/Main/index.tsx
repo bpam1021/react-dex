@@ -1,8 +1,19 @@
-import React, { useState, FormEvent, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import api from "../../service/api";
 
-import { Form, Content, Pokes, PokeTypes, Error, LinkPoke } from "./styles";
+import SuprisedPikachu from "../../assets/suprised_pikachu.png";
+
+import {
+  SearchContainer,
+  Content,
+  Pokes,
+  PokeTypes,
+  Error,
+  LinkPoke,
+  NoPokesFoundMessage,
+  ContentNothingMessage,
+} from "./styles";
 
 interface PokemonTypes {
   type: {
@@ -29,7 +40,7 @@ interface GetPokeArrayProps {
 }
 
 const Main: React.FC = () => {
-  const [newPoke, setPokemon] = useState("");
+  const [pokeFiltered, setPokemonFiltered] = useState("");
   const [newError, setNewError] = useState("");
   const [loading, setLoading] = useState(false);
   const [pokemonsList, setPokeList] = useState<Pokemon[]>([]);
@@ -58,70 +69,58 @@ const Main: React.FC = () => {
     getData();
   }, [getAllPokes]);
 
-  async function handleSubmit(
-    event: FormEvent<HTMLFormElement>
-  ): Promise<void> {
-    event.preventDefault();
-
-    if (!newPoke) {
-      setNewError("Digite o nome do Pokémon com letras minúsculas");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      // const newPokeTreated = newPoke.charAt(0).toLowerCase() + newPoke.slice(1);
-      // const response = await api.get<Pokemon>(`pokemon/${newPokeTreated}`);
-      setLoading(false);
-
-      // const pokeInfo = response.data;
-
-      setNewError("");
-      setPokemon("");
-    } catch (e) {
-      setNewError("Erro na busca do Pokémon citado");
-      setLoading(false);
-    }
-  }
+  // eslint-disable-next-line array-callback-return
+  const filteredPokes = pokemonsList.filter((poke) => {
+    return poke.name.toLowerCase().includes(pokeFiltered.toLowerCase());
+  });
 
   return (
     <>
-      <Form hasError={!!newError} onSubmit={handleSubmit}>
+      <SearchContainer>
         <input
-          value={newPoke}
-          onChange={(e) => setPokemon(e.target.value)}
+          value={pokeFiltered}
+          onChange={(e) => setPokemonFiltered(e.target.value)}
           placeholder="Digite o nome do Pokémon"
         />
-        <button type="submit" disabled={loading}>
+        <button type="button" disabled={loading}>
           {loading ? "Carregando" : "Procurar"}
         </button>
 
         {newError && !loading && <Error>{newError}</Error>}
-      </Form>
+      </SearchContainer>
 
-      <Content>
-        {pokemonsList.map((poke) => (
-          <LinkPoke key={poke.id} to={`/pokeInfo/${poke.name}`}>
-            <Pokes>
-              <img
-                src={poke.sprites.other["official-artwork"].front_default}
-                alt={poke.name}
-              />
-              <div>
-                <strong>
-                  {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
-                </strong>
-                <small>{`#${poke.id}`}</small>
-              </div>
-              {poke.types.map((type, i) => (
-                <PokeTypes key={i} pokeType={type.type.name}>
-                  {type.type.name.toUpperCase()}
-                </PokeTypes>
-              ))}
-            </Pokes>
-          </LinkPoke>
-        ))}
-      </Content>
+      {filteredPokes.length ? (
+        <Content>
+          {filteredPokes.map((poke) => (
+            <LinkPoke key={poke.id} to={`/pokeInfo/${poke.name}`}>
+              <Pokes>
+                <img
+                  src={poke.sprites.other["official-artwork"].front_default}
+                  alt={poke.name}
+                />
+                <div>
+                  <strong>
+                    {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                  </strong>
+                  <small>{`#${poke.id}`}</small>
+                </div>
+                {poke.types.map((type, i) => (
+                  <PokeTypes key={i} pokeType={type.type.name}>
+                    {type.type.name.toUpperCase()}
+                  </PokeTypes>
+                ))}
+              </Pokes>
+            </LinkPoke>
+          ))}
+        </Content>
+      ) : (
+          <ContentNothingMessage>
+            <NoPokesFoundMessage>
+              No Pokémon found
+            <img src={SuprisedPikachu} />
+            </NoPokesFoundMessage>
+          </ContentNothingMessage>
+        )}
     </>
   );
 };

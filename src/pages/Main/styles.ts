@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { shade } from "polished";
 
@@ -33,11 +33,11 @@ interface PokeTypesProps {
   pokeType: string;
 }
 
-interface FormProps {
-  hasError: boolean;
-}
+// interface FormProps {
+//   hasError: boolean;
+// }
 
-export const Form = styled.form<FormProps>`
+export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,13 +51,6 @@ export const Form = styled.form<FormProps>`
     height: 40px;
     text-align: center;
   }
-
-  ${(props) =>
-    props.hasError &&
-    css`
-      border-color: #c50300;
-      border-radius: 2px;
-    `}
 
   button {
     border: 0;
@@ -180,5 +173,27 @@ export const LinkPoke = styled(Link)`
 
   &:visited {
     color: #000;
+  }
+`;
+
+export const ContentNothingMessage = styled.div`
+  border-top: 1px solid ${shade(0.2, "#ffe5b5")};
+  margin: 30px auto 0 auto;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+`;
+
+export const NoPokesFoundMessage = styled.span`
+  color: #b3a07f;
+  font-size: 4rem;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin-top: 10px;
+
+  img {
+    height: 90px;
   }
 `;

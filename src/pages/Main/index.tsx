@@ -1,4 +1,5 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent, useEffect, useCallback } from "react";
+import axios from "axios";
 import api from "../../service/api";
 
 import { Form, Content, Pokes, PokeTypes, Error, LinkPoke } from "./styles";
@@ -14,27 +15,48 @@ interface Pokemon {
   name: string;
   types: PokemonTypes[];
   sprites: {
-    front_default: string;
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
   };
+}
+
+interface GetPokeArrayProps {
+  name: string;
+  url: string;
 }
 
 const Main: React.FC = () => {
   const [newPoke, setPokemon] = useState("");
   const [newError, setNewError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [pokemonsList, setPokeList] = useState<Pokemon[]>(() => {
-    const savedPokes = localStorage.getItem("PokeApi - React");
+  const [pokemonsList, setPokeList] = useState<Pokemon[]>([]);
 
-    if (savedPokes) {
-      return JSON.parse(savedPokes);
-    }
+  const getAllPokes = useCallback(async (): Promise<void> => {
+    const { data } = await api.get("pokemon/?limit=150");
+    const urlsArray: Array<GetPokeArrayProps> = data.results;
 
-    return [];
-  });
+    const pokesObjectsArray = urlsArray.map((i) => i.url);
+
+    const allPokesArray: Pokemon[] = await Promise.all(
+      pokesObjectsArray.map(async (i) => {
+        const response = await axios.get(i);
+
+        return response.data;
+      })
+    );
+    setPokeList(allPokesArray);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("PokeApi - React", JSON.stringify(pokemonsList));
-  }, [pokemonsList]);
+    async function getData(): Promise<void> {
+      getAllPokes();
+    }
+
+    getData();
+  }, [getAllPokes]);
 
   async function handleSubmit(
     event: FormEvent<HTMLFormElement>
@@ -48,14 +70,13 @@ const Main: React.FC = () => {
 
     try {
       setLoading(true);
-      const newPokeTreated = newPoke.charAt(0).toLowerCase() + newPoke.slice(1);
-      const response = await api.get<Pokemon>(`pokemon/${newPokeTreated}`);
+      // const newPokeTreated = newPoke.charAt(0).toLowerCase() + newPoke.slice(1);
+      // const response = await api.get<Pokemon>(`pokemon/${newPokeTreated}`);
       setLoading(false);
 
-      const pokeInfo = response.data;
+      // const pokeInfo = response.data;
 
       setNewError("");
-      setPokeList([...pokemonsList, pokeInfo]);
       setPokemon("");
     } catch (e) {
       setNewError("Erro na busca do Pokémon citado");
@@ -82,7 +103,10 @@ const Main: React.FC = () => {
         {pokemonsList.map((poke) => (
           <LinkPoke key={poke.id} to={`/pokeInfo/${poke.name}`}>
             <Pokes>
-              <img src={poke.sprites.front_default} alt={poke.name} />
+              <img
+                src={poke.sprites.other["official-artwork"].front_default}
+                alt={poke.name}
+              />
               <div>
                 <strong>
                   {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}

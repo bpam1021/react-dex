@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import api from "../../service/api";
 
+import firstLetterInUpper from "../../utils/firstLetterInUpper";
+
 import SuprisedPikachu from "../../assets/suprised_pikachu.png";
 
 import {
@@ -9,7 +11,6 @@ import {
   Content,
   Pokes,
   PokeTypes,
-  Error,
   LinkPoke,
   NoPokesFoundMessage,
   ContentNothingMessage,
@@ -41,8 +42,6 @@ interface GetPokeArrayProps {
 
 const Main: React.FC = () => {
   const [pokeFiltered, setPokemonFiltered] = useState("");
-  const [newError, setNewError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [pokemonsList, setPokeList] = useState<Pokemon[]>([]);
 
   const getAllPokes = useCallback(async (): Promise<void> => {
@@ -82,11 +81,7 @@ const Main: React.FC = () => {
           onChange={(e) => setPokemonFiltered(e.target.value)}
           placeholder="Digite o nome do Pokémon"
         />
-        <button type="button" disabled={loading}>
-          {loading ? "Carregando" : "Procurar"}
-        </button>
-
-        {newError && !loading && <Error>{newError}</Error>}
+        <button type="button">Procurar</button>
       </SearchContainer>
 
       {filteredPokes.length ? (
@@ -99,9 +94,7 @@ const Main: React.FC = () => {
                   alt={poke.name}
                 />
                 <div>
-                  <strong>
-                    {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
-                  </strong>
+                  <strong>{firstLetterInUpper(poke.name)}</strong>
                   <small>{`#${poke.id}`}</small>
                 </div>
                 {poke.types.map((type, i) => (

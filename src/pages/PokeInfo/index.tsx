@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
+import { BsFillCaretDownFill } from "react-icons/bs";
 
 import firstLetterInUpper from "../../utils/firstLetterInUpper";
 import api from "../../service/api";
@@ -112,6 +113,7 @@ const PokeInfo: React.FC = () => {
               <p>
                 {firstLetterInUpper(ability.ability.name.replace("-", " "))}
               </p>
+              <BsFillCaretDownFill />
             </AbilityAccordion>
           ))}
         </PokeAbilities>

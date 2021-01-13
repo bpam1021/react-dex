@@ -124,4 +124,10 @@ export const AbilityAccordion = styled.button`
     font-family: "Press Start 2P", cursive;
     font-size: 30px;
   }
+
+  svg {
+    position: absolute;
+    color: #ffff;
+    right: 24%;
+  }
 `;

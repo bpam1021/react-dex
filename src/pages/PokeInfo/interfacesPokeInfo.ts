@@ -5,6 +5,7 @@ export interface ParamsProps {
 export interface AbilitiesArray {
   ability: {
     name: string;
+    url: string;
   };
 }
 
@@ -17,6 +18,13 @@ export interface PokeTypesProps {
 export interface StatsArray {
   base_stat: number;
   stat: {
+    name: string;
+  };
+}
+
+export interface AbilityPropsArray {
+  effect: string;
+  language: {
     name: string;
   };
 }

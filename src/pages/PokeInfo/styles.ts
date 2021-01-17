@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { shade } from "polished";
 
 import { typesVariation } from "../../Styles/PokeTypesVariation";
 
@@ -101,33 +100,4 @@ export const PokeAbilities = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`;
-
-export const AbilityAccordion = styled.button`
-  border: none;
-  display: flex;
-  height: 100px;
-  width: 70%;
-  background-color: #eb7171;
-  border-radius: 10px;
-  margin-top: 60px;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background-color: ${shade(0.05, "#eb7171")};
-  }
-
-  p {
-    text-align: center;
-    color: #ffff;
-    font-family: "Press Start 2P", cursive;
-    font-size: 30px;
-  }
-
-  svg {
-    position: absolute;
-    color: #ffff;
-    right: 24%;
-  }
 `;

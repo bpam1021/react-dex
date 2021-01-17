@@ -16,11 +16,7 @@ import {
   ContentNothingMessage,
 } from "./styles";
 
-interface PokemonTypes {
-  type: {
-    name: string;
-  };
-}
+import { GetPokeArrayProps, PokemonTypes } from "./interfacesMain";
 
 interface Pokemon {
   id: number;
@@ -33,11 +29,6 @@ interface Pokemon {
       };
     };
   };
-}
-
-interface GetPokeArrayProps {
-  name: string;
-  url: string;
 }
 
 const Main: React.FC = () => {

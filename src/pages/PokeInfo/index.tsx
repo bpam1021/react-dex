@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
-import { BsFillCaretDownFill } from "react-icons/bs";
+import axios from "axios";
 
 import firstLetterInUpper from "../../utils/firstLetterInUpper";
 import api from "../../service/api";
+
+import AbilityAccordion from "../../components/Accordion";
 
 import {
   Container,
@@ -17,7 +19,6 @@ import {
   PokePhysics,
   PokeStats,
   PokeAbilities,
-  AbilityAccordion,
   AttributesContent,
 } from "./styles";
 
@@ -31,9 +32,9 @@ import {
 interface PokeProps {
   id: number;
   name: string;
-  abilities: AbilitiesArray[];
   height: number;
   weight: number;
+  abilities: AbilitiesArray[];
   sprites: {
     other: {
       "official-artwork": {
@@ -45,20 +46,54 @@ interface PokeProps {
   stats: StatsArray[];
 }
 
+interface AbilityProps {
+  name: string;
+  effectEntry: string;
+}
+
 const PokeInfo: React.FC = () => {
   const { params } = useRouteMatch<ParamsProps>();
   const { pokeName } = params;
   const [pokeAttribute, setPokeAttribute] = useState<PokeProps>();
+  const [pokeSkill, setPokeSkill] = useState<AbilityProps[]>([]);
+  const [pokeSkillURL, setPokeSkillURL] = useState<AbilitiesArray[]>([]);
 
   useEffect(() => {
     async function getPokeData(): Promise<void> {
-      const { data } = await api.get(`pokemon/${pokeName}`);
+      const { data } = await api.get<PokeProps>(`pokemon/${pokeName}`);
       setPokeAttribute(data);
+      setPokeSkillURL(data.abilities);
     }
     getPokeData();
   }, [pokeName]);
 
-  console.log(pokeAttribute);
+  useEffect(() => {
+    async function getAbility(): Promise<void> {
+      const skillsArray = pokeSkillURL.map((i) => i.ability.url);
+
+      const allSkills = await Promise.all(
+        skillsArray.map(async (s) => {
+          const { data } = await axios.get(s);
+
+          return data;
+        })
+      );
+
+      const e = allSkills.map((skill) => {
+        return {
+          name: skill.names.find((entry: any) => entry.language.name === "en")
+            .name,
+          effectEntry: skill.effect_entries.find(
+            (entry: any) => entry.language.name === "en"
+          ).effect,
+        };
+      });
+
+      setPokeSkill(e);
+    }
+
+    getAbility();
+  }, [pokeAttribute, pokeSkillURL]);
 
   return (
     <Container>
@@ -106,15 +141,14 @@ const PokeInfo: React.FC = () => {
           </PokeAttributes>
         </AttributesContent>
       )}
-      {pokeAttribute && (
+      {pokeSkill && (
         <PokeAbilities>
-          {pokeAttribute.abilities.map((ability, i) => (
-            <AbilityAccordion key={i}>
-              <p>
-                {firstLetterInUpper(ability.ability.name.replace("-", " "))}
-              </p>
-              <BsFillCaretDownFill />
-            </AbilityAccordion>
+          {pokeSkill.map((ability, i) => (
+            <AbilityAccordion
+              key={i}
+              name={firstLetterInUpper(ability.name.replace("-", " "))}
+              abilityContent={ability.effectEntry}
+            />
           ))}
         </PokeAbilities>
       )}

@@ -70,9 +70,9 @@ const Main: React.FC = () => {
         <input
           value={pokeFiltered}
           onChange={(e) => setPokemonFiltered(e.target.value)}
-          placeholder="Digite o nome do Pokémon"
+          placeholder="Search for a Pokémon"
         />
-        <button type="button">Procurar</button>
+        <button type="button">Search</button>
       </SearchContainer>
 
       {filteredPokes.length ? (

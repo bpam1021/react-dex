@@ -12,6 +12,13 @@ export const Container = styled.div`
   width: 90vw;
   flex-direction: column;
   justify-content: center;
+
+  > svg {
+    position: absolute;
+    top: 7rem;
+    left: 1rem;
+    cursor: pointer;
+  }
 `;
 
 export const AttributesContent = styled.div`

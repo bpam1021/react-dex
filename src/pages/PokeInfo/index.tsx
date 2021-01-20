@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import axios from "axios";
+import { BsArrowLeft } from "react-icons/bs";
 
 import firstLetterInUpper from "../../utils/firstLetterInUpper";
 import api from "../../service/api";
@@ -54,6 +55,7 @@ interface AbilityProps {
 const PokeInfo: React.FC = () => {
   const { params } = useRouteMatch<ParamsProps>();
   const { pokeName } = params;
+  const history = useHistory();
   const [pokeAttribute, setPokeAttribute] = useState<PokeProps>();
   const [pokeSkill, setPokeSkill] = useState<AbilityProps[]>([]);
   const [pokeSkillURL, setPokeSkillURL] = useState<AbilitiesArray[]>([]);
@@ -97,6 +99,12 @@ const PokeInfo: React.FC = () => {
 
   return (
     <Container>
+      <BsArrowLeft
+        size={40}
+        onClick={() => {
+          history.push("/");
+        }}
+      />
       {pokeAttribute && (
         <AttributesContent>
           <PokePortrait>

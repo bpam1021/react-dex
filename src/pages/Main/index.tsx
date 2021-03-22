@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { BsStarFill } from "react-icons/bs";
 import api from "../../service/api";
+
+import FavoritesSideBar from "../../components/FavoritePokeSideBar";
+import PokeCard from "../../components/PokeCard";
 
 import firstLetterInUpper from "../../utils/firstLetterInUpper";
 
@@ -9,7 +13,6 @@ import SuprisedPikachu from "../../assets/suprised_pikachu.png";
 import {
   SearchContainer,
   Content,
-  Pokes,
   PokeTypes,
   LinkPoke,
   NoPokesFoundMessage,
@@ -75,11 +78,19 @@ const Main: React.FC = () => {
         <button type="button">Search</button>
       </SearchContainer>
 
+      <FavoritesSideBar />
+
       {filteredPokes.length ? (
         <Content>
           {filteredPokes.map((poke) => (
-            <LinkPoke key={poke.id} to={`/pokeInfo/${poke.name}`}>
-              <Pokes>
+            <PokeCard
+              id={poke.id}
+              name={poke.name}
+              sprites={poke.sprites}
+              icon={BsStarFill}
+              key={poke.id}
+            >
+              <LinkPoke to={`/pokeInfo/${poke.name}`}>
                 <img
                   src={poke.sprites.other["official-artwork"].front_default}
                   alt={poke.name}
@@ -93,18 +104,18 @@ const Main: React.FC = () => {
                     {type.type.name.toUpperCase()}
                   </PokeTypes>
                 ))}
-              </Pokes>
-            </LinkPoke>
+              </LinkPoke>
+            </PokeCard>
           ))}
         </Content>
       ) : (
-          <ContentNothingMessage>
-            <NoPokesFoundMessage>
-              No Pokémon found
+        <ContentNothingMessage>
+          <NoPokesFoundMessage>
+            No Pokémon found
             <img src={SuprisedPikachu} alt="Suprised Pikachu" />
-            </NoPokesFoundMessage>
-          </ContentNothingMessage>
-        )}
+          </NoPokesFoundMessage>
+        </ContentNothingMessage>
+      )}
     </>
   );
 };

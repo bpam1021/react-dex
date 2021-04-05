@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
-import { IconBaseProps } from "react-icons";
+import React, { useContext, useState, useCallback } from "react";
+import { BsStarFill, BsStar } from "react-icons/bs";
 
 import { FavoritesPokemonsContext } from "../../context/FavoritePokemons/FavoritePokemonsContext";
 
 import { Pokes } from "./styled";
 
 interface PokeCardProps {
-  icon: React.ComponentType<IconBaseProps>;
   id: number;
   name: string;
   sprites: {
@@ -22,19 +21,47 @@ const PokeCards: React.FC<PokeCardProps> = ({
   id,
   name,
   sprites,
-  icon: Icon,
   children,
 }) => {
-  const { addPokeToFavorite } = useContext(FavoritesPokemonsContext);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { addPokeToFavorite, removePokeFromFavorite } = useContext(
+    FavoritesPokemonsContext
+  );
+
+  const handleSetFavoriteIcon = useCallback(() => {
+    setIsFavorite(!isFavorite);
+
+    if (isFavorite) {
+      removePokeFromFavorite({ id, name, sprites });
+    } else {
+      addPokeToFavorite({ id, name, sprites });
+    }
+  }, [
+    addPokeToFavorite,
+    removePokeFromFavorite,
+    id,
+    name,
+    sprites,
+    isFavorite,
+  ]);
 
   return (
     <Pokes>
-      <Icon
-        size={25}
-        onClick={() => {
-          addPokeToFavorite({ id, name, sprites });
-        }}
-      />
+      {isFavorite ? (
+        <BsStarFill
+          size={25}
+          onClick={() => {
+            handleSetFavoriteIcon();
+          }}
+        />
+      ) : (
+        <BsStar
+          size={25}
+          onClick={() => {
+            handleSetFavoriteIcon();
+          }}
+        />
+      )}
       {children}
     </Pokes>
   );

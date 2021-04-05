@@ -29,13 +29,27 @@ export const FavoritesPokemonsProvider: React.FC = ({ children }) => {
     [favoritePokemons]
   );
 
+  const removePokeFromFavorite = useCallback(
+    (poke: FavoritesPokemons) => {
+      const arrayWithoutFavoritePokemon = favoritePokemons.filter(
+        (p) => p.id !== poke.id
+      );
+      setFavoritesPokemons([...arrayWithoutFavoritePokemon]);
+    },
+    [favoritePokemons]
+  );
+
   useEffect(() => {
     localStorage.setItem("FavoritePokemons", JSON.stringify(favoritePokemons));
   }, [favoritePokemons]);
 
   return (
     <FavoritesPokemonsContext.Provider
-      value={{ favoritesPokes: favoritePokemons, addPokeToFavorite }}
+      value={{
+        favoritesPokes: favoritePokemons,
+        addPokeToFavorite,
+        removePokeFromFavorite,
+      }}
     >
       {children}
     </FavoritesPokemonsContext.Provider>

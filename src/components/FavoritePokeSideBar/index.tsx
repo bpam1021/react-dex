@@ -4,6 +4,8 @@ import { FavoritesPokemonsContext } from "../../context/FavoritePokemons/Favorit
 
 import firsLetterUpper from "../../utils/firstLetterInUpper";
 
+import ConfusedPsyduck from "../../assets/confused_psyduck.png";
+
 import {
   Content,
   PokeTag,
@@ -11,6 +13,7 @@ import {
   PokeName,
   PokeID,
   OpenCloseFavsButtonContent,
+  NoFavoritePokemonsContent,
 } from "./styled";
 
 const FavoritesSideBar: React.FC = () => {
@@ -30,18 +33,21 @@ const FavoritesSideBar: React.FC = () => {
         <BsFillCaretRightFill />
       </OpenCloseFavsButtonContent>
       <Content isShowed={showSidebar}>
-        {favoritesPokes ? (
+        {favoritesPokes.length ? (
           favoritesPokes.map((poke) => (
             <PokeTag key={poke.id}>
               <PokeSprite
                 src={poke.sprites.other["official-artwork"].front_default}
               />
               <PokeName>{firsLetterUpper(poke.name)}</PokeName>
-              <PokeID>{poke.id}</PokeID>
+              <PokeID>{`#${poke.id}`}</PokeID>
             </PokeTag>
           ))
         ) : (
-          <p>Sem poke</p>
+          <NoFavoritePokemonsContent>
+            <p>No Favorite Pokémon</p>
+            <img src={ConfusedPsyduck} alt="confused psyduck" />
+          </NoFavoritePokemonsContent>
         )}
       </Content>
     </>

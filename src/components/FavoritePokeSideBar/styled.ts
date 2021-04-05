@@ -38,6 +38,24 @@ export const Content = styled.div<SideBarProps>`
   border-radius: 8px;
 `;
 
+export const NoFavoritePokemonsContent = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin-right: 5px;
+    color: #b3a07f;
+    font-size: 20px;
+    font-family: "Lato", sans-serif;
+  }
+
+  img {
+    height: 60px;
+  }
+`;
+
 export const OpenCloseFavsButtonContent = styled.div<SideBarProps>`
   position: fixed;
   display: flex;
@@ -73,6 +91,7 @@ export const PokeName = styled.p`
 `;
 
 export const PokeID = styled.p`
+  color: #cccc;
   font-size: 10px;
   font-family: "Press Start 2P", cursive;
 `;

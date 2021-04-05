@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { BsStarFill } from "react-icons/bs";
 import api from "../../service/api";
 
 import FavoritesSideBar from "../../components/FavoritePokeSideBar";
@@ -87,7 +86,6 @@ const Main: React.FC = () => {
               id={poke.id}
               name={poke.name}
               sprites={poke.sprites}
-              icon={BsStarFill}
               key={poke.id}
             >
               <LinkPoke to={`/pokeInfo/${poke.name}`}>

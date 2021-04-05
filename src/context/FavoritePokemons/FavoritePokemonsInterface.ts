@@ -13,4 +13,5 @@ export interface FavoritesPokemons {
 export interface FavoritesPokemonsContextData {
   favoritesPokes: FavoritesPokemons[];
   addPokeToFavorite({ id, name, sprites }: FavoritesPokemons): void;
+  removePokeFromFavorite({ id, name, sprites }: FavoritesPokemons): void;
 }

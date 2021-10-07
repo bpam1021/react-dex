@@ -66,8 +66,10 @@ const PokeCards: React.FC<PokeCardProps> = ({ id, name, sprites, pokemon }) => {
           alt={pokemon.name}
         />
         <div>
-          <strong>{firstLetterInUpper(pokemon.name)}</strong>
-          <small>{`#${pokemon.id}`}</small>
+          <div>
+            <strong>{firstLetterInUpper(pokemon.name)}</strong>
+            <small>{`#${pokemon.id}`}</small>
+          </div>
           {pokemon.types.map((type, i) => (
             <PokeTypes key={i} pokeType={type.type.name}>
               {type.type.name.toUpperCase()}

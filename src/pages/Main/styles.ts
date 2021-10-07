@@ -1,8 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { Link } from "react-router-dom";
 import { shade } from "polished";
-
-import { typesVariation } from "../../Styles/PokeTypesVariation";
 
 const hide = keyframes`
 to {
@@ -10,15 +7,15 @@ to {
     }
 `;
 
-interface PokeTypesProps {
-  pokeType: string;
-}
-
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 
   input {
     border: 0;
@@ -88,28 +85,10 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-`;
 
-export const PokeTypes = styled.p<PokeTypesProps>`
-  margin-top: 10px;
-  font-size: 10px;
-  text-align: center;
-  font-weight: bold;
-  display: block;
-  text-align: center;
-  font-family: "Press Start 2P", cursive;
-  color: ${(props) => typesVariation[props.pokeType]};
-`;
-
-export const LinkPoke = styled(Link)`
-  text-decoration: none;
-
-  &:link {
-    color: #000;
-  }
-
-  &:visited {
-    color: #000;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 

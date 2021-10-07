@@ -1,4 +1,10 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { typesVariation } from "../../Styles/PokeTypesVariation";
+
+interface PokeTypesProps {
+  pokeType: string;
+}
 
 interface PokeTypesProps {
   pokeType: string;
@@ -15,6 +21,12 @@ export const Pokes = styled.div`
   margin-left: 30px;
   box-shadow: 10px 10px 5px #cccccc;
   border: 2px #b8b8b8 solid;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+  }
 
   svg {
     position: absolute;
@@ -47,4 +59,41 @@ export const Pokes = styled.div`
       color: #a3a3a3;
     }
   }
+`;
+
+export const LinkPoke = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+
+  &:link {
+    color: #000;
+  }
+
+  &:visited {
+    color: #000;
+  }
+  /* 
+  div {
+    
+  } */
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+
+    /* div {
+
+    } */
+  }
+`;
+
+export const PokeTypes = styled.p<PokeTypesProps>`
+  margin-top: 10px;
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: ${(props) => typesVariation[props.pokeType]};
 `;

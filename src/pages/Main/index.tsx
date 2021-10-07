@@ -5,33 +5,16 @@ import api from "../../service/api";
 import FavoritesSideBar from "../../components/FavoritePokeSideBar";
 import PokeCard from "../../components/PokeCard";
 
-import firstLetterInUpper from "../../utils/firstLetterInUpper";
-
 import SuprisedPikachu from "../../assets/suprised_pikachu.png";
 
 import {
   SearchContainer,
   Content,
-  PokeTypes,
-  LinkPoke,
   NoPokesFoundMessage,
   ContentNothingMessage,
 } from "./styles";
 
-import { GetPokeArrayProps, PokemonTypes } from "./interfacesMain";
-
-interface Pokemon {
-  id: number;
-  name: string;
-  types: PokemonTypes[];
-  sprites: {
-    other: {
-      "official-artwork": {
-        front_default: string;
-      };
-    };
-  };
-}
+import { GetPokeArrayProps, Pokemon } from "../../interfaces/pokemon.interface";
 
 const Main: React.FC = () => {
   const [pokeFiltered, setPokemonFiltered] = useState("");
@@ -87,23 +70,8 @@ const Main: React.FC = () => {
               name={poke.name}
               sprites={poke.sprites}
               key={poke.id}
-            >
-              <LinkPoke to={`/pokeInfo/${poke.name}`}>
-                <img
-                  src={poke.sprites.other["official-artwork"].front_default}
-                  alt={poke.name}
-                />
-                <div>
-                  <strong>{firstLetterInUpper(poke.name)}</strong>
-                  <small>{`#${poke.id}`}</small>
-                </div>
-                {poke.types.map((type, i) => (
-                  <PokeTypes key={i} pokeType={type.type.name}>
-                    {type.type.name.toUpperCase()}
-                  </PokeTypes>
-                ))}
-              </LinkPoke>
-            </PokeCard>
+              pokemon={poke}
+            />
           ))}
         </Content>
       ) : (

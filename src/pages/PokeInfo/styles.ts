@@ -86,6 +86,10 @@ export const PokeWeightHeight = styled.div`
   flex-direction: column;
   line-height: 25px;
   margin-left: 35px;
+
+  @media (max-width: 768px) {
+    margin-left: 13px;
+  }
 `;
 
 export const WeightHeight = styled.p`

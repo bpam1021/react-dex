@@ -74,11 +74,29 @@ export const PokeTypes = styled.div`
   line-height: 25px;
 `;
 
-export const Types = styled.p<PokeTypesProps>`
-  font-size: 20px;
-  font-weight: bold;
+export const Types = styled.span<PokeTypesProps>`
+  align-items: center;
+  background-color: ${(props) => typesVariation[props.pokeType]};
+  border-radius: 8px;
+  color: #ffff;
+  display: flex;
   font-family: "Press Start 2P", cursive;
-  color: ${(props) => typesVariation[props.pokeType]};
+  font-size: 15px;
+  font-weight: bold;
+  height: 50px;
+  justify-content: center;
+  padding: 11px;
+  text-align: center;
+  width: 137px;
+
+  & + span {
+    margin-top: 10px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    width: 110px;
+  }
 `;
 
 export const PokeWeightHeight = styled.div`

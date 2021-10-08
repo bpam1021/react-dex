@@ -14,7 +14,8 @@ export const SearchContainer = styled.div`
   margin-top: 50px;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: auto;
+    padding: 0 16px;
   }
 
   input {
@@ -24,6 +25,10 @@ export const SearchContainer = styled.div`
     width: 400px;
     height: 40px;
     text-align: center;
+
+    @media (max-width: 768px) {
+      width: 271px;
+    }
   }
 
   button {

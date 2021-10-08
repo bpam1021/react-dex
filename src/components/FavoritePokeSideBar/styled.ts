@@ -6,14 +6,14 @@ interface SideBarProps {
 
 export const Content = styled.div<SideBarProps>`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  position: fixed;
-  width: 300px;
+  flex: 1;
   height: 60%;
-  z-index: 1;
   overflow-y: scroll;
-  visibility: ${(props) => (props.isShowed ? "hidden" : "visible")};
+  position: fixed;
+  visibility: ${(props) => (!props.isShowed ? "hidden" : "visible")};
+  width: 300px;
+  z-index: 1;
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -32,23 +32,23 @@ export const Content = styled.div<SideBarProps>`
   }
 
   background-color: #ffff;
-  border-top: 4px solid #c24442;
-  border-right: 4px solid #c24442;
   border-bottom: 4px solid #c24442;
   border-radius: 8px;
+  border-right: 4px solid #c24442;
+  border-top: 4px solid #c24442;
 `;
 
 export const NoFavoritePokemonsContent = styled.div`
-  margin-top: 20px;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 20px;
 
   p {
-    margin-right: 5px;
     color: #b3a07f;
-    font-size: 20px;
     font-family: "Lato", sans-serif;
+    font-size: 20px;
+    margin-right: 5px;
   }
 
   img {
@@ -57,25 +57,26 @@ export const NoFavoritePokemonsContent = styled.div`
 `;
 
 export const OpenCloseFavsButtonContent = styled.div<SideBarProps>`
-  position: fixed;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 100px;
-  left: ${(props) => (props.isShowed ? "0px" : "290px")};
-  top: 150px;
   background-color: #c24442;
   border-radius: 8px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  cursor: pointer;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  left: ${(props) => (!props.isShowed ? "0px" : "290px")};
+  position: fixed;
+  top: 150px;
+  width: 40px;
   z-index: 1;
 `;
 
 export const PokeTag = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-around;
 
   border-bottom: 2px solid #ccc;
@@ -86,12 +87,12 @@ export const PokeSprite = styled.img`
 `;
 
 export const PokeName = styled.p`
-  font-size: 10px;
   font-family: "Press Start 2P", cursive;
+  font-size: 10px;
 `;
 
 export const PokeID = styled.p`
   color: #cccc;
-  font-size: 10px;
   font-family: "Press Start 2P", cursive;
+  font-size: 10px;
 `;

@@ -3,7 +3,7 @@ import { BsStarFill, BsStar } from "react-icons/bs";
 
 import { FavoritesPokemonsContext } from "../../context/FavoritePokemons/FavoritePokemonsContext";
 
-import { LinkPoke, Pokes, PokeTypes } from "./styled";
+import { LinkPoke, Pokes, PokeTypes, PokeTypeContainer } from "./styled";
 import { Pokemon } from "../../interfaces/pokemon.interface";
 import firstLetterInUpper from "../../utils/firstLetterInUpper";
 
@@ -65,16 +65,18 @@ const PokeCards: React.FC<PokeCardProps> = ({ id, name, sprites, pokemon }) => {
           src={pokemon.sprites.other["official-artwork"].front_default}
           alt={pokemon.name}
         />
-        <div>
-          <div>
+        <div className="poke-infos">
+          <div className="poke-number-name">
             <strong>{firstLetterInUpper(pokemon.name)}</strong>
             <small>{`#${pokemon.id}`}</small>
           </div>
-          {pokemon.types.map((type, i) => (
-            <PokeTypes key={i} pokeType={type.type.name}>
-              {type.type.name.toUpperCase()}
-            </PokeTypes>
-          ))}
+          <PokeTypeContainer>
+            {pokemon.types.map((type, i) => (
+              <PokeTypes key={i} pokeType={type.type.name}>
+                {type.type.name.toUpperCase()}
+              </PokeTypes>
+            ))}
+          </PokeTypeContainer>
         </div>
       </LinkPoke>
     </Pokes>

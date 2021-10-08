@@ -13,9 +13,8 @@ export const Pokes = styled.div`
   box-shadow: 10px 10px 5px #cccccc;
   cursor: pointer;
   flex-direction: row;
-  height: 200px;
-  margin-left: 30px;
-  margin-top: 30px;
+  height: 236px;
+  margin: 30px 0 0 30px;
   width: 150px;
 
   @media (max-width: 768px) {
@@ -60,33 +59,33 @@ export const LinkPoke = styled(Link)`
     }
   }
 
-  div {
+  .poke-infos {
     align-items: center;
-    border-bottom: 1px solid #cccccc;
     border-top: 1px solid #cccccc;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 
     @media (max-width: 768px) {
       align-items: baseline;
       border: 0;
-      flex-direction: column;
       flex: 1;
     }
 
-    div {
+    .poke-number-name {
       @media (max-width: 768px) {
         align-items: center;
         display: flex;
         flex-direction: row;
       }
+
       strong {
         font-family: "Lato", sans-serif;
         font-size: 20px;
         margin-left: 10px;
 
         @media (max-width: 768px) {
-          margin: 0;
+          margin: 10px 0 5px 10px;
         }
       }
 
@@ -96,6 +95,15 @@ export const LinkPoke = styled(Link)`
       }
     }
   }
+`;
+
+export const PokeTypeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
 `;
 
 export const PokeTypes = styled.span<PokeTypesProps>`
@@ -110,12 +118,13 @@ export const PokeTypes = styled.span<PokeTypesProps>`
   height: 30px;
   justify-content: center;
   margin-top: 10px;
+  padding: 11px;
   text-align: center;
-  width: 70px;
+  width: 100px;
 
   @media (max-width: 768px) {
-    margin-top: 0;
     margin-bottom: 10px;
+    margin-top: 0;
     width: 90%;
   }
 `;

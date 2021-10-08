@@ -20,4 +20,5 @@ export const typesVariation: TypesVariation = {
   bug: "#a8b81f",
   ice: "#9bd6d9",
   dragon: "#7231ff",
+  fighting: "#a8a774",
 };

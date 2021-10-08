@@ -20,6 +20,12 @@ export const AbilityAccordion = styled.button`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    width: 95vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
   &:hover {
     background-color: ${shade(0.05, "#eb7171")};
   }
@@ -29,12 +35,17 @@ export const AbilityAccordion = styled.button`
     color: #ffff;
     font-family: "Press Start 2P", cursive;
     font-size: 30px;
+    margin: 32px 0 14px;
   }
 
   svg {
     position: absolute;
     color: #ffff;
     right: 30%;
+
+    @media (max-width: 768px) {
+      position: unset;
+    }
   }
 `;
 
@@ -45,6 +56,11 @@ export const AccordionContent = styled.div`
   width: 67%;
   border-radius: 0 0 5px 5px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0px 1px;
+  }
 `;
 
 export const AccordionText = styled.div`

@@ -24,6 +24,10 @@ export const Container = styled.div`
 export const AttributesContent = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const PokePortrait = styled.div`
@@ -44,6 +48,10 @@ export const PokeAttributes = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 80px;
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 
 export const PokeName = styled.div`

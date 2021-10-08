@@ -28,7 +28,7 @@ import {
   PokeTypesProps,
   StatsArray,
   ParamsProps,
-} from "./interfacesPokeInfo";
+} from "../../interfaces/interfacesPokeInfo.interface";
 
 interface PokeProps {
   id: number;
